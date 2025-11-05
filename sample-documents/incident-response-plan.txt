@@ -1,0 +1,135 @@
+ACME Corporation Incident Response Plan v1.5
+
+1. INTRODUCTION
+This Incident Response Plan (IRP) establishes the procedures for ACME Corporation to respond to security incidents in a coordinated, timely, and effective manner.
+
+2. PURPOSE
+- Minimize damage to ACME Corporation's systems and data
+- Ensure rapid recovery from security incidents
+- Maintain business continuity
+- Comply with regulatory requirements
+
+3. INCIDENT RESPONSE TEAM
+3.1 Core Team Members
+- Incident Response Manager (CISO)
+- Security Analyst Lead
+- IT Operations Manager
+- Legal Counsel
+- Communications Director
+- Human Resources Representative
+
+3.2 Contact Information
+All team members contact information is maintained in the secure incident response portal.
+
+4. INCIDENT CLASSIFICATION
+4.1 Severity Levels
+- CRITICAL: System-wide outage, data breach, major financial impact
+- HIGH: Multiple systems affected, significant data exposure
+- MEDIUM: Single system affected, limited data exposure
+- LOW: Minor security event, no data impact
+
+4.2 Incident Types
+- Malware/Ransomware
+- Data Breach
+- Denial of Service
+- Insider Threat
+- Physical Security
+- Third-Party Compromise
+
+5. INCIDENT RESPONSE PROCESS
+5.1 Detection and Reporting
+- Security monitoring systems alert
+- Employee reports
+- External notifications
+- Customer complaints
+
+5.2 Initial Assessment (0-2 hours)
+- Verify incident
+- Assess impact
+- Determine severity
+- Notify core team
+
+5.3 Containment (2-6 hours)
+- Isolate affected systems
+- Block malicious activity
+- Preserve evidence
+- Document actions
+
+5.4 Investigation (6-24 hours)
+- Root cause analysis
+- Impact assessment
+- Data breach determination
+- Evidence collection
+
+5.5 Eradication and Recovery (24-72 hours)
+- Remove threats
+- Restore systems
+- Validate security
+- Monitor for recurrence
+
+5.6 Post-Incident Activities (72+ hours)
+- Lessons learned
+- Process improvement
+- Documentation updates
+- Compliance reporting
+
+6. COMMUNICATIONS PROTOCOL
+6.1 Internal Communications
+- Executive updates (hourly for critical incidents)
+- Employee notifications
+- Stakeholder briefings
+
+6.2 External Communications
+- Regulatory notifications (within 72 hours)
+- Customer notifications (as required)
+- Media statements (approved by Legal)
+
+7. DOCUMENTATION REQUIREMENTS
+7.1 Incident Log
+All incidents must be logged with:
+- Date and time detected
+- Description of incident
+- Severity level
+- Actions taken
+- Resolution status
+- Lessons learned
+
+7.2 Evidence Preservation
+- System images
+- Network logs
+- Memory dumps
+- Chain of custody documentation
+
+8. TRAINING AND TESTING
+8.1 Training Requirements
+- Annual incident response training for all team members
+- Quarterly scenario-based exercises
+- Monthly security awareness training
+
+8.2 Testing Schedule
+- Tabletop exercises: Quarterly
+- Simulated incidents: Semi-annually
+- Full-scale drills: Annually
+
+9. COMPLIANCE AND LEGAL
+9.1 Regulatory Requirements
+- GDPR: 72-hour notification requirement
+- HIPAA: Breach notification within 60 days
+- PCI DSS: Immediate notification required
+- State laws: Varying notification requirements
+
+9.2 Legal Considerations
+- Attorney-client privilege
+- Evidence preservation for litigation
+- Regulatory reporting obligations
+
+10. PLAN MAINTENANCE
+- Annual review and update
+- After-action reviews for major incidents
+- Quarterly team contact verification
+- Monthly system and process validation
+
+Document Owner: Chief Information Security Officer
+Last Updated: December 2023
+Next Review: December 2024
+Approved by: Chief Information Officer

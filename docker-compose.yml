@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  checklist-service:
+    build: ./checklist-service
+    container_name: checklist-service
+    ports:
+      - "8001:8001"
+    networks:
+      - compliance-network
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./checklist-service:/app
+    restart: unless-stopped
+
+  evidence-analyzer:
+    build: ./evidence-analyzer
+    container_name: evidence-analyzer
+    ports:
+      - "8002:8002"
+    networks:
+      - compliance-network
+    environment:
+      - NODE_ENV=development
+      - AI_PROVIDER=openai
+      - AI_API_KEY=${AI_API_KEY:-your-api-key-here}
+      - AI_BASE_URL=${AI_BASE_URL:-https://api.openai.com/v1}
+    volumes:
+      - ./evidence-analyzer:/app
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - compliance-network
+    depends_on:
+      - checklist-service
+      - evidence-analyzer
+    restart: unless-stopped
+
+networks:
+  compliance-network:
+    driver: bridge
+
+volumes:
+  checklist-data:
+  evidence-data:
