@@ -44,9 +44,9 @@ This microservices-based application consists of:
 
 4. **Access the application**
    
-   - Frontend: http://localhost:3000
-   - Checklist Service API: http://localhost:8001
-   - Evidence Analyzer API: http://localhost:8002
+   - Frontend: http://localhost:2000
+   - Checklist Service API: http://localhost:2001
+   - Evidence Analyzer API: http://localhost:2002
 
 ## 📋 Features
 
@@ -70,14 +70,14 @@ This microservices-based application consists of:
 
 ## 🔧 API Endpoints
 
-### Checklist Service (Port 8001)
+### Checklist Service (Port 2001)
 
 - `GET /checklists` - List all available checklists
 - `GET /checklists/{id}` - Get checklist details
 - `POST /checklists/{id}/items/{itemId}/status` - Update item status
 - `GET /checklists/{id}/progress` - Get compliance progress
 
-### Evidence Analyzer (Port 8002)
+### Evidence Analyzer (Port 2002)
 
 - `POST /analyze/document` - Upload and analyze document
 - `POST /analyze/match` - Match document to requirement

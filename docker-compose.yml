@@ -5,7 +5,7 @@ services:
     build: ./checklist-service
     container_name: checklist-service
     ports:
-      - "8001:8001"
+      - "2001:8001"
     networks:
       - compliance-network
     environment:
@@ -18,7 +18,7 @@ services:
     build: ./evidence-analyzer
     container_name: evidence-analyzer
     ports:
-      - "8002:8002"
+      - "2002:8002"
     networks:
       - compliance-network
     environment:
@@ -34,7 +34,7 @@ services:
     build: ./frontend
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "2000:3000"
     networks:
       - compliance-network
     depends_on:

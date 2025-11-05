@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Checklist, Progress, Document, AnalysisResult, MatchResult, GapAnalysis } from '../types';
 
-const CHECKLIST_SERVICE_URL = process.env.REACT_APP_CHECKLIST_SERVICE || 'http://localhost:8001';
-const EVIDENCE_ANALYZER_URL = process.env.REACT_APP_EVIDENCE_ANALYZER || 'http://localhost:8002';
+const CHECKLIST_SERVICE_URL = process.env.REACT_APP_CHECKLIST_SERVICE || 'http://localhost:2001';
+const EVIDENCE_ANALYZER_URL = process.env.REACT_APP_EVIDENCE_ANALYZER || 'http://localhost:2002';
 
 // Checklist Service API
 export const checklistAPI = {
