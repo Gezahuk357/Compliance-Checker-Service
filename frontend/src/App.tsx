@@ -68,8 +68,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Compliance Checker Service</h1>
-        <p>AI-powered compliance analysis platform</p>
+        <h1>Compliance Ellenőrző Szolgáltatás</h1>
+        <p>AI-alapú compliance elemző platform</p>
       </header>
 
       <div className="tabs">
@@ -77,19 +77,19 @@ const App: React.FC = () => {
           className={activeTab === 'checklist' ? 'active' : ''}
           onClick={() => setActiveTab('checklist')}
         >
-          Checklist
+          Ellenőrzőlista
         </button>
         <button
           className={activeTab === 'documents' ? 'active' : ''}
           onClick={() => setActiveTab('documents')}
         >
-          Documents
+          Dokumentumok
         </button>
         <button
           className={activeTab === 'gaps' ? 'active' : ''}
           onClick={() => setActiveTab('gaps')}
         >
-          Gap Analysis
+          Hiányosság Elemzés
         </button>
       </div>
 

@@ -83,7 +83,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
 
   return (
     <div className="document-upload">
-      <h2>Document Upload & Analysis</h2>
+      <h2>Dokumentum Feltöltés és Elemzés</h2>
       
       <div
         {...getRootProps()}
@@ -91,26 +91,26 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
       >
         <input {...getInputProps()} />
         {uploading ? (
-          <p>Uploading and analyzing documents...</p>
+          <p>Dokumentumok feltöltése és elemzése...</p>
         ) : isDragActive ? (
-          <p>Drop the files here...</p>
+          <p>Helyezze ide a fájlokat...</p>
         ) : (
-          <p>Drag & drop documents here, or click to select files</p>
+          <p>Húzzon és ejtsen dokumentumokat ide, vagy kattintson fájlok kiválasztásához</p>
         )}
       </div>
 
       {uploadedDocuments.length > 0 && (
         <div className="uploaded-documents">
-          <h3>Uploaded Documents</h3>
+          <h3>Feltöltött Dokumentumok</h3>
           {uploadedDocuments.map(doc => (
             <div key={doc.id} className="document-card">
               <h4>{doc.filename}</h4>
               {analysisResults[doc.id] && (
                 <div className="analysis-result">
-                  <p><strong>Document Type:</strong> {analysisResults[doc.id].document_type}</p>
-                  <p><strong>Completeness Score:</strong> {(analysisResults[doc.id].completeness_score * 100).toFixed(1)}%</p>
+                  <p><strong>Dokumentum Típus:</strong> {analysisResults[doc.id].document_type}</p>
+                  <p><strong>Teljesség Pontszám:</strong> {(analysisResults[doc.id].completeness_score * 100).toFixed(1)}%</p>
                   <div className="security-controls">
-                    <strong>Security Controls:</strong>
+                    <strong>Biztonsági Vezérlők:</strong>
                     <ul>
                       {analysisResults[doc.id].security_controls.map((control, index) => (
                         <li key={index}>{control}</li>
@@ -127,9 +127,9 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
                   const item = checklist?.items.find(i => i.id === itemId);
                   return (
                     <div key={key} className="match-result">
-                      <p><strong>Matched with:</strong> {item?.requirement}</p>
-                      <p><strong>Confidence:</strong> {(match.confidence * 100).toFixed(1)}%</p>
-                      <p><strong>Reasoning:</strong> {match.reasoning}</p>
+                      <p><strong>Egyezik a következővel:</strong> {item?.requirement}</p>
+                      <p><strong>Magabiztosság:</strong> {(match.confidence * 100).toFixed(1)}%</p>
+                      <p><strong>Indoklás:</strong> {match.reasoning}</p>
                     </div>
                   );
                 })}

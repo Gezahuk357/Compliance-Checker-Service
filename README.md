@@ -1,130 +1,130 @@
 # Compliance Checker Service
 
-AI-powered compliance analysis platform for ISO 27001/9001 compliance management.
+AI-alapú compliance elemző platform ISO 27001/9001 compliance menedzsmenthez.
 
-## 🏗️ Architecture
+## 🏗️ Architektúra
 
-This microservices-based application consists of:
+Ez a mikroszerviz-alapú alkalmazás a következőkből áll:
 
-- **Checklist Service** (Python/FastAPI) - Manages compliance checklists and progress tracking
-- **Evidence Analyzer** (Node.js/Express) - AI-powered document analysis and matching
-- **Frontend** (React/TypeScript) - Web interface for compliance management
-- **Docker Compose** - Orchestrates all services
+- **Checklist Service** (Python/FastAPI) - Compliance checklist-ek és progress követés kezelése
+- **Evidence Analyzer** (Node.js/Express) - AI-alapú dokumentum elemzés és illesztés
+- **Frontend** (React/TypeScript) - Web felület compliance menedzsmenthez
+- **Docker Compose** - Minden szolgáltatás orchestrálása
 
-## 🚀 Quick Start
+## 🚀 Gyors Kezdés
 
-### Prerequisites
+### Előfeltételek
 
-- Docker and Docker Compose
+- Docker és Docker Compose
 - Git
 
-### Setup Instructions
+### Telepítési Útmutató
 
-1. **Clone the repository**
+1. **Repository klónozása**
    ```bash
    git clone <repository-url>
    cd compliance-checker
    ```
 
-2. **Configure AI API Key** (Optional)
+2. **AI API Kulcs Konfigurálása** (Opcionális)
    
-   Create a `.env` file in the root directory:
+   Hozzon létre egy `.env` fájlt a gyökérkönyvtárban:
    ```env
    AI_API_KEY=your-openai-api-key-here
    AI_BASE_URL=https://api.openai.com/v1
    AI_PROVIDER=openai
    ```
    
-   *Note: The application will work with mock responses if no API key is provided.*
+   *Megjegyzés: Az alkalmazás mock válaszokkal fog működni, ha nincs API kulcs megadva.*
 
-3. **Start all services**
+3. **Minden szolgáltatás indítása**
    ```bash
    docker-compose up --build
    ```
 
-4. **Access the application**
+4. **Alkalmazás elérése**
    
    - Frontend: http://localhost:2000
    - Checklist Service API: http://localhost:2001
    - Evidence Analyzer API: http://localhost:2002
 
-## 📋 Features
+## 📋 Funkciók
 
-### Checklist Management
-- View ISO 27001 simplified compliance requirements
-- Track compliance status for each requirement
-- Monitor overall compliance progress
-- Update requirement status with evidence
+### Checklist Menedzsment
+- ISO 27001 egyszerűsített compliance követelmények megtekintése
+- Compliance státusz követése minden követelményhez
+- Összesített compliance progress monitorozása
+- Követelmény státusz frissítése bizonyítékokkal
 
-### Document Analysis
-- Upload compliance documents (drag & drop)
-- AI-powered document analysis
-- Automatic matching to compliance requirements
-- Confidence scoring for matches
+### Dokumentum Elemzés
+- Compliance dokumentumok feltöltése (drag & drop)
+- AI-alapú dokumentum elemzés
+- Automatikus illesztés compliance követelményekhez
+- Confidence scoring az illesztésekhez
 
-### Gap Analysis
-- Identify compliance gaps
-- Prioritize missing requirements
-- Get suggested evidence for gaps
-- Track improvement recommendations
+### Hiányosság Elemzés
+- Compliance hiányosságok azonosítása
+- Hiányzó követelmények prioritizálása
+- Javasolt bizonyítékok a hiányosságokhoz
+- Fejlesztési javaslatok követése
 
-## 🔧 API Endpoints
+## 🔧 API Endpoint-ok
 
 ### Checklist Service (Port 2001)
 
-- `GET /checklists` - List all available checklists
-- `GET /checklists/{id}` - Get checklist details
-- `POST /checklists/{id}/items/{itemId}/status` - Update item status
-- `GET /checklists/{id}/progress` - Get compliance progress
+- `GET /checklists` - Minden elérhető checklist listázása
+- `GET /checklists/{id}` - Checklist részleteinek lekérése
+- `POST /checklists/{id}/items/{itemId}/status` - Elem státusz frissítése
+- `GET /checklists/{id}/progress` - Compliance progress lekérése
 
 ### Evidence Analyzer (Port 2002)
 
-- `POST /analyze/document` - Upload and analyze document
-- `POST /analyze/match` - Match document to requirement
-- `GET /analyze/gaps` - Get compliance gap analysis
-- `GET /analyze/documents` - List analyzed documents
+- `POST /analyze/document` - Dokumentum feltöltés és elemzés
+- `POST /analyze/match` - Dokumentum illesztése követelményhez
+- `GET /analyze/gaps` - Compliance hiányosság elemzés lekérése
+- `GET /analyze/documents` - Elemzett dokumentumok listázása
 
-## 📁 Project Structure
+## 📁 Projekt Struktúra
 
 ```
 compliance-checker/
-├── checklist-service/          # Python/FastAPI service
-│   ├── main.py                # Main application
-│   ├── requirements.txt       # Python dependencies
-│   └── Dockerfile            # Docker configuration
-├── evidence-analyzer/         # Node.js/Express service
-│   ├── server.js             # Main application
-│   ├── package.json          # Node.js dependencies
-│   └── Dockerfile            # Docker configuration
+├── checklist-service/          # Python/FastAPI szolgáltatás
+│   ├── main.py                # Fő alkalmazás
+│   ├── requirements.txt       # Python függőségek
+│   └── Dockerfile            # Docker konfiguráció
+├── evidence-analyzer/         # Node.js/Express szolgáltatás
+│   ├── server.js             # Fő alkalmazás
+│   ├── package.json          # Node.js függőségek
+│   └── Dockerfile            # Docker konfiguráció
 ├── frontend/                  # React TypeScript app
 │   ├── src/
-│   │   ├── components/       # React components
-│   │   ├── services/        # API services
-│   │   ├── types/           # TypeScript types
-│   │   └── App.tsx          # Main application
-│   ├── public/              # Static files
-│   ├── Dockerfile           # Docker configuration
-│   └── nginx.conf            # Nginx configuration
-├── sample-documents/          # Sample compliance documents
-├── docker-compose.yml        # Service orchestration
-├── README.md                 # This file
-├── AI_USAGE.md              # AI usage documentation
-└── ARCHITECTURE.md          # Architecture decisions
+│   │   ├── components/       # React komponensek
+│   │   ├── services/        # API szolgáltatások
+│   │   ├── types/           # TypeScript típusok
+│   │   └── App.tsx          # Fő alkalmazás
+│   ├── public/              # Statikus fájlok
+│   ├── Dockerfile           # Docker konfiguráció
+│   └── nginx.conf            # Nginx konfiguráció
+├── sample-documents/          # Mint compliance dokumentumok
+├── docker-compose.yml        # Szolgáltatás orchestrálás
+├── README.md                 # Ez a fájl
+├── AI_USAGE.md              # AI használati dokumentáció
+└── ARCHITECTURE.md          # Architektúráli döntések
 ```
 
-## 🧪 Testing with Sample Documents
+## 🧪 Tesztelés Mint Dokumentumokkal
 
-The `sample-documents/` directory contains three example compliance documents:
+A `sample-documents/` könyvtár három példa compliance dokumentumot tartalmaz:
 
-1. **password-policy.txt** - Comprehensive password policy
-2. **incident-response-plan.txt** - Incident response procedures
-3. **backup-policy.txt** - Data backup and recovery policy
+1. **password-policy.txt** - Átfogó jelszó szabályzat
+2. **incident-response-plan.txt** - Incidens válasz eljárások
+3. **backup-policy.txt** - Adatmentés és helyreállítási szabályzat
 
-Upload these documents through the web interface to test the AI analysis and matching capabilities.
+Töltse fel ezeket a dokumentumokat a web felületen keresztül az AI elemzés és illesztési képességek teszteléséhez.
 
-## 🔍 Development
+## 🔍 Fejlesztés
 
-### Running Services Individually
+### Szolgáltatások Egyéni Futtatása
 
 **Checklist Service:**
 ```bash
@@ -147,71 +147,71 @@ npm install
 npm start
 ```
 
-### Environment Variables
+### Environment Változók
 
-- `AI_API_KEY` - OpenAI API key (or other AI provider)
-- `AI_BASE_URL` - AI service base URL
+- `AI_API_KEY` - OpenAI API kulcs (vagy más AI provider)
+- `AI_BASE_URL` - AI szolgáltatás base URL
 - `AI_PROVIDER` - AI provider (openai, claude, etc.)
 
-## 🤖 AI Integration
+## 🤖 AI Integráció
 
-This application uses AI for:
+Ez az alkalmazás AI-t használ a következőkre:
 
-1. **Document Analysis** - Identifying security controls and compliance areas
-2. **Requirement Matching** - Matching documents to compliance requirements
-3. **Gap Analysis** - Identifying missing compliance evidence
+1. **Dokumentum Elemzés** - Biztonsági vezérlők és compliance területek azonosítása
+2. **Követelmény Illesztés** - Dokumentumok illesztése compliance követelményekhez
+3. **Hiányosság Elemzés** - Hiányzó compliance bizonyítékok azonosítása
 
-See [`AI_USAGE.md`](AI_USAGE.md) for detailed AI implementation information.
+Részletes AI implementációs információkért lásd az [`AI_USAGE.md`](AI_USAGE.md) fájlt.
 
-## 📊 Compliance Framework
+## 📊 Compliance Keretrendszer
 
-The application uses a simplified ISO 27001 framework with the following categories:
+Az alkalmazás egyszerűsített ISO 27001 keretrendszert használ a következő kategóriákkal:
 
-- **Access Control** - Password policies, user access reviews, admin logging
-- **Incident Management** - Response plans, incident logs, recovery procedures
-- **Data Protection** - Backup policies, encryption standards, data retention
+- **Hozzáférés Kezelés** - Jelszó szabályzatok, felhasználói hozzáférés felülvizsgálatok, admin logging
+- **Incidens Menedzsment** - Válasz tervek, incidens log-ok, helyreállítási eljárások
+- **Adatvédelem** - Mentési szabályzatok, titkosítási standardok, adatmegőrzés
 
-## 🔒 Security Considerations
+## 🔒 Biztonsági Megfontolások
 
-- All AI API calls are logged
-- Document content is processed in memory only
-- No persistent storage of sensitive document content
-- API keys should be stored securely in environment variables
+- Minden AI API hívás naplózásra kerül
+- Dokumentum tartalom csak memóriában kerül feldolgozásra
+- Nincs perzisztens tárolása az érzékeny dokumentum tartalomnak
+- API kulcsokat biztonságosan kell tárolni environment változókban
 
-## 📈 Monitoring and Logging
+## 📈 Monitorozás és Logging
 
-- Each service provides health check endpoints
-- Docker Compose logs all service activities
-- Frontend displays real-time compliance progress
+- Minden szolgáltatás biztosít health check endpoint-okat
+- A Docker Compose naplózza minden szolgáltatás aktivitását
+- A frontend megjeleníti a valós idejű compliance progress-t
 
-## 🐛 Troubleshooting
+## 🐛 Hibaelhárítás
 
-**Common Issues:**
+**Gyakori Problémák:**
 
-1. **Services won't start**
-   - Check Docker is running
-   - Verify port availability (3000, 8001, 8002)
+1. **Szolgáltatások nem indulnak**
+   - Ellenőrizze, hogy a Docker fut-e
+   - Verifikálja a portok elérhetőségét (3000, 8001, 8002)
 
-2. **AI analysis not working**
-   - Verify AI_API_KEY is set correctly
-   - Check network connectivity to AI provider
-   - Application will use mock responses if AI service unavailable
+2. **AI elemzés nem működik**
+   - Ellenőrizze, hogy az AI_API_KEY helyesen van-e beállítva
+   - Ellenőrizze a hálózati kapcsolatot az AI provider-hez
+   - Az alkalmazás mock válaszokat használ, ha az AI szolgáltatás nem elérhető
 
-3. **Frontend can't connect to backend**
-   - Verify all services are running
-   - Check Docker network configuration
-   - Review nginx proxy configuration
+3. **A frontend nem tud csatlakozni a backend-hez**
+   - Ellenőrizze, hogy minden szolgáltatás fut-e
+   - Ellenőrizze a Docker hálózati konfigurációt
+   - Nézze át az nginx proxy konfigurációt
 
-## 📝 License
+## 📝 Licenc
 
-This project is for demonstration purposes as part of a technical assessment.
+Ez a projekt bemutatási célokat szolgál technikai felmérés részeként.
 
-## 🤝 Support
+## 🤝 Támogatás
 
-For questions or issues, please refer to the documentation files:
-- [`AI_USAGE.md`](AI_USAGE.md) - AI implementation details
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) - Architecture decisions
+Kérdések vagy problémák esetén, kérjük, hivatkozzon a dokumentációs fájlokra:
+- [`AI_USAGE.md`](AI_USAGE.md) - AI implementációs részletek
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) - Architektúráli döntések
 
 ---
 
-**Note:** This is a POC/MVP demonstration, not production-ready code. For production use, implement proper authentication, database persistence, error handling, and security measures.
+**Megjegyzés:** Ez egy POC/MVP bemutató, nem production-ready kód. Production használatra implementáljon megfelelő authentikációt, adatbázis perzisztenciát, error handling-t és biztonsági intézkedéseket.

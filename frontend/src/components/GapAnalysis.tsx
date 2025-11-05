@@ -37,42 +37,42 @@ const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
   };
 
   if (loading) {
-    return <div className="gap-analysis">Loading gap analysis...</div>;
+    return <div className="gap-analysis">Hiányosság elemzés betöltése...</div>;
   }
 
   if (!gapAnalysis) {
-    return <div className="gap-analysis">Failed to load gap analysis</div>;
+    return <div className="gap-analysis">A hiányosság elemzés betöltése sikertelen</div>;
   }
 
   return (
     <div className="gap-analysis">
-      <h2>Compliance Gap Analysis</h2>
+      <h2>Compliance Hiányosság Elemzés</h2>
       
       <div className="gap-summary">
         <div className="gap-stats">
           <div className="stat-item">
             <span className="stat-value">{gapAnalysis.total_gaps}</span>
-            <span className="stat-label">Total Gaps</span>
+            <span className="stat-label">Összes Hiányosság</span>
           </div>
           <div className="stat-item">
             <span className="stat-value">
               {gapAnalysis.gaps.filter(gap => gap.priority === 'critical').length}
             </span>
-            <span className="stat-label">Critical</span>
+            <span className="stat-label">Kritikus</span>
           </div>
           <div className="stat-item">
             <span className="stat-value">
               {gapAnalysis.gaps.filter(gap => gap.priority === 'high').length}
             </span>
-            <span className="stat-label">High Priority</span>
+            <span className="stat-label">Magas Prioritású</span>
           </div>
         </div>
       </div>
 
       <div className="gaps-list">
-        <h3>Identified Gaps</h3>
+        <h3>Azonosított Hiányosságok</h3>
         {gapAnalysis.gaps.length === 0 ? (
-          <p className="no-gaps">No gaps identified. Great job!</p>
+          <p className="no-gaps">Nincsenek hiányosságok. Szép munka!</p>
         ) : (
           gapAnalysis.gaps.map(gap => (
             <div key={gap.requirement_id} className="gap-card">
@@ -87,15 +87,15 @@ const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
               </div>
               
               <div className="gap-requirement">
-                <strong>Requirement:</strong> {gap.requirement}
+                <strong>Követelmény:</strong> {gap.requirement}
               </div>
               
               <div className="gap-status">
-                <strong>Status:</strong> {gap.status}
+                <strong>Státusz:</strong> {gap.status}
               </div>
               
               <div className="suggested-evidence">
-                <strong>Suggested Evidence:</strong>
+                <strong>Javasolt Bizonyíték:</strong>
                 <ul>
                   {gap.suggested_evidence.map((evidence, index) => (
                     <li key={index}>{evidence}</li>
@@ -110,11 +110,11 @@ const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
       <div className="analysis-footer">
         <p>
           <small>
-            Analysis performed on: {new Date(gapAnalysis.analyzed_at).toLocaleString()}
+            Elemzés végrehajtva: {new Date(gapAnalysis.analyzed_at).toLocaleString()}
           </small>
         </p>
         <button onClick={loadGapAnalysis} className="refresh-btn">
-          Refresh Analysis
+          Elemzés Frissítése
         </button>
       </div>
     </div>

@@ -61,7 +61,7 @@ const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onSt
                 <div className="item-requirement">{item.requirement}</div>
                 {item.evidence.length > 0 && (
                   <div className="item-evidence">
-                    <strong>Evidence:</strong>
+                    <strong>Bizonyíték:</strong>
                     <ul>
                       {item.evidence.map((evidence, index) => (
                         <li key={index}>{evidence}</li>
@@ -75,9 +75,9 @@ const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onSt
                     onChange={(e) => onStatusUpdate(item.id, e.target.value)}
                     className="status-select"
                   >
-                    <option value="pending">Pending</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="completed">Completed</option>
+                    <option value="pending">Függőben</option>
+                    <option value="in_progress">Folyamatban</option>
+                    <option value="completed">Befejezve</option>
                   </select>
                 </div>
               </div>

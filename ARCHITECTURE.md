@@ -1,78 +1,78 @@
-# Architecture Documentation
+# Architektúra Dokumentáció
 
-## 🏗️ System Architecture Overview
+## 🏗️ Rendszerarchitektúra Áttekintés
 
-The Compliance Checker Service is designed as a microservices architecture with the following key principles:
+A Compliance Checker Service mikroszerviz architektúraként lett tervezve a következő kulcselvekkel:
 
-- **Service Separation:** Each business domain is a separate service
-- **Technology Diversity:** Multiple programming languages as required
-- **Containerization:** All services run in Docker containers
-- **AI Integration:** AI services are integrated for document analysis
-- **API-First:** All services expose REST APIs
+- **Szerviz Szétválasztás:** Minden üzleti domain különálló szolgáltatás
+- **Technológiai Sokszínűség:** Több programozási nyelv szükség szerint
+- **Konténerizáció:** Minden szolgáltatás Docker konténerekben fut
+- **AI Integráció:** AI szolgáltatások integrálva dokumentum elemzésre
+- **API-First:** Minden szolgáltatás REST API-t tesz elérhetővé
 
-## 📋 Architecture Components
+## 📋 Architektúra Komponensek
 
 ### 1. Checklist Service (Python/FastAPI)
-**Responsibilities:**
-- Manage compliance checklists
-- Track requirement status
-- Calculate compliance progress
-- Provide checklist CRUD operations
+**Felelősségi körök:**
+- Compliance checklist-ek kezelése
+- Követelmény státusz követése
+- Compliance progress számítása
+- Checklist CRUD műveletek biztosítása
 
-**Technology Stack:**
+**Technológiai Stack:**
 - Python 3.11
-- FastAPI framework
-- Pydantic for data validation
-- Uvicorn ASGI server
+- FastAPI keretrendszer
+- Pydantic adat validálásra
+- Uvicorn ASGI szerver
 
-**Key Design Decisions:**
-- **In-memory storage:** Chosen for POC simplicity
-- **RESTful API:** Standard HTTP methods for CRUD operations
-- **JSON responses:** Easy frontend integration
-- **Health check endpoint:** For monitoring and load balancing
+**Kulcs Tervezési Döntések:**
+- **In-memory tárolás:** POC egyszerűsége miatt választva
+- **RESTful API:** Standard HTTP metódusok CRUD műveletekhez
+- **JSON válaszok:** Könnyű frontend integráció
+- **Health check endpoint:** Monitorozásra és load balancing-ra
 
 ### 2. Evidence Analyzer (Node.js/Express)
-**Responsibilities:**
-- Document upload and processing
-- AI-powered document analysis
-- Document-to-requirement matching
-- Gap analysis and recommendations
+**Felelősségi körök:**
+- Dokumentum feltöltés és feldolgozás
+- AI-alapú dokumentum elemzés
+- Dokumentum-követelmény illesztés
+- Hiányosság elemzés és javaslatok
 
-**Technology Stack:**
+**Technológiai Stack:**
 - Node.js 18
-- Express.js framework
-- Multer for file uploads
-- Axios for HTTP requests
+- Express.js keretrendszer
+- Multer fájl feltöltésre
+- Axios HTTP kérésekhez
 
-**Key Design Decisions:**
-- **Memory storage:** Documents stored in memory during analysis
-- **AI abstraction:** Pluggable AI provider interface
-- **Mock fallback:** Graceful degradation when AI unavailable
-- **File type support:** Multiple document formats (TXT, PDF, DOC, DOCX)
+**Kulcs Tervezési Döntések:**
+- **Memory storage:** Dokumentumok memóriában tárolva elemzés közben
+- **AI absztrakció:** Cserélhető AI provider interfész
+- **Mock fallback:** Elegáns degradálás amikor AI nem elérhető
+- **Fájl típus támogatás:** Több dokumentum formátum (TXT, PDF, DOC, DOCX)
 
 ### 3. Frontend (React/TypeScript)
-**Responsibilities:**
-- User interface for compliance management
-- Document upload and visualization
-- Progress tracking and reporting
-- Gap analysis display
+**Felelősségi körök:**
+- Felhasználói felület compliance menedzsmenthez
+- Dokumentum feltöltés és vizualizáció
+- Progress követés és riportálás
+- Hiányosság elemzés megjelenítés
 
-**Technology Stack:**
+**Technológiai Stack:**
 - React 18
-- TypeScript for type safety
-- React Dropzone for file uploads
-- Axios for API communication
+- TypeScript típusbiztonságra
+- React Dropzone fájl feltöltésre
+- Axios API kommunikációra
 
-**Key Design Decisions:**
-- **Component-based architecture:** Reusable UI components
-- **Type safety:** TypeScript for better development experience
-- **Responsive design:** Mobile-friendly interface
-- **Real-time updates:** Progress tracking without page refresh
+**Kulcs Tervezési Döntések:**
+- **Komponens alapú architektúra:** Újrahasznosítható UI komponensek
+- **Típusbiztonság:** TypeScript jobb fejlesztői élményért
+- **Reszponzív design:** Mobilbarát felület
+- **Real-time frissítések:** Progress követés oldalfrissítés nélkül
 
-## 🔗 Service Communication
+## 🔗 Szerviz Kommunikáció
 
-### API Gateway Pattern
-The frontend uses nginx as a reverse proxy to route requests to appropriate backend services:
+### API Gateway Minta
+A frontend nginx-et használ reverse proxy-ként a kérések megfelelő backend szolgáltatásokhoz való irányítására:
 
 ```
 Frontend (nginx:3000)
@@ -80,26 +80,26 @@ Frontend (nginx:3000)
 └── /analyze/* → Evidence Analyzer (8002)
 ```
 
-### Service-to-Service Communication
-- **Synchronous communication:** Direct HTTP calls
-- **JSON format:** Standard data exchange format
-- **Error handling:** HTTP status codes and error messages
+### Szerviz-közti Kommunikáció
+- **Szinkron kommunikáció:** Közvetlen HTTP hívások
+- **JSON formátum:** Standard adatcsere formátum
+- **Error handling:** HTTP státusz kódok és hibaüzenetek
 
-## 🗄️ Data Architecture
+## 🗄️ Adatarchitektúra
 
-### Data Storage Strategy
-**Current Implementation (POC):**
-- In-memory storage for all services
-- No persistent databases
-- Data lost on service restart
+### Adattárolási Stratégia
+**Jelenlegi Implementáció (POC):**
+- In-memory tárolás minden szolgáltatásnál
+- Nincs perzisztens adatbázis
+- Adatok elvesznek szolgáltatás újraindításkor
 
-**Production Considerations:**
-- PostgreSQL for checklist service
-- MongoDB for evidence analyzer
-- Redis for caching and session management
-- S3 for document storage
+**Production Megfontolások:**
+- PostgreSQL a checklist service-hez
+- MongoDB az evidence analyzer-hez
+- Redis cache-elés és session menedzsmenthez
+- S3 dokumentum tárolásra
 
-### Data Models
+### Adatmodellek
 
 #### Checklist Service
 ```python
@@ -137,57 +137,57 @@ AnalysisResult {
 }
 ```
 
-## 🤖 AI Integration Architecture
+## 🤖 AI Integrációs Architektúra
 
-### AI Provider Abstraction
-The evidence analyzer implements a provider pattern to support multiple AI services:
+### AI Provider Absztrakció
+Az evidence analyzer provider mintát implementál több AI szolgáltatás támogatására:
 
 ```javascript
 class AIProvider {
   async analyze(prompt) {
-    // Provider-specific implementation
+    // Provider-specifikus implementáció
   }
 }
 
 class OpenAIProvider extends AIProvider {
-  // OpenAI-specific implementation
+  // OpenAI-specifikus implementáció
 }
 
 class ClaudeProvider extends AIProvider {
-  // Claude-specific implementation
+  // Claude-specifikus implementáció
 }
 ```
 
-### AI Prompt Strategy
-- **Structured prompts:** Clear instructions and expected output format
-- **Context limiting:** Document truncation for token management
-- **Fallback responses:** Mock responses when AI unavailable
-- **Error handling:** Graceful degradation for AI failures
+### AI Prompt Stratégia
+- **Strukturált prompt-ok:** Egyértelmű utasítások és várt kimeneti formátum
+- **Kontext korlátozás:** Dokumentum csonkolás token menedzsmenthez
+- **Fallback válaszok:** Mock válaszok amikor AI nem elérhető
+- **Error handling:** Elegáns degradálás AI hibák esetén
 
-## 🔒 Security Architecture
+## 🔒 Biztonsági Architektúra
 
-### Current Implementation (POC)
-- **No authentication:** Simplified for demonstration
-- **API key management:** Environment variables for AI services
-- **Input validation:** Basic validation in all services
-- **CORS configuration:** Cross-origin request handling
+### Jelenlegi Implementáció (POC)
+- **Nincs authentikáció:** Egyszerűsítve bemutatásra
+- **API kulcs menedzsment:** Environment változók AI szolgáltatásokhoz
+- **Input validálás:** Alapvető validálás minden szolgáltatásnál
+- **CORS konfiguráció:** Cross-origin kérés kezelése
 
-### Production Security Considerations
-- **OAuth 2.0/JWT:** User authentication and authorization
-- **API rate limiting:** Prevent abuse and manage costs
-- **Data encryption:** At rest and in transit
-- **Audit logging:** Security event tracking
-- **Network segmentation:** Service isolation
+### Production Biztonsági Megfontolások
+- **OAuth 2.0/JWT:** Felhasználói authentikáció és autorizáció
+- **API rate limiting:** Visszaélés megelőzése és költségek menedzselése
+- **Adat titkosítás:** Nyugvó és tranzitban lévő adatokhoz
+- **Audit logging:** Biztonsági esemény követés
+- **Hálózati szegmentáció:** Szerviz izoláció
 
-## 🚀 Deployment Architecture
+## 🚀 Telepítési Architektúra
 
-### Container Strategy
-- **Multi-stage builds:** Optimized Docker images
-- **Alpine Linux:** Minimal base images for security
-- **Health checks:** Container health monitoring
-- **Resource limits:** Memory and CPU constraints
+### Konténer Stratégia
+- **Multi-stage build-ök:** Optimalizált Docker képek
+- **Alpine Linux:** Minimális base képek biztonságért
+- **Health check-ek:** Konténer health monitorozás
+- **Erőforrás korlátok:** Memória és CPU megszorítások
 
-### Docker Compose Configuration
+### Docker Compose Konfiguráció
 ```yaml
 services:
   checklist-service:
@@ -206,103 +206,103 @@ services:
     depends_on: [checklist-service, evidence-analyzer]
 ```
 
-### Production Deployment Options
-- **Kubernetes:** Container orchestration and scaling
-- **AWS ECS:** Managed container service
-- **Docker Swarm:** Simple container clustering
-- **Cloud Run:** Serverless container deployment
+### Production Telepítési Opciók
+- **Kubernetes:** Konténer orchestráció és skálázás
+- **AWS ECS:** Menedzselt konténer szolgáltatás
+- **Docker Swarm:** Egyszerű konténer klaszterezés
+- **Cloud Run:** Serverless konténer telepítés
 
-## 📊 Monitoring and Observability
+## 📊 Monitorozás és Megfigyelhetőség
 
-### Current Implementation
-- **Health check endpoints:** Service availability monitoring
-- **Docker logs:** Container log aggregation
-- **Error handling:** Basic error logging
+### Jelenlegi Implementáció
+- **Health check endpoint-ök:** Szerviz elérhetőség monitorozása
+- **Docker log-ok:** Konténer log aggregáció
+- **Error handling:** Alapvető hiba logging
 
-### Production Monitoring Strategy
-- **Application metrics:** Prometheus/Grafana
+### Production Monitorozási Stratégia
+- **Alkalmazás metrikák:** Prometheus/Grafana
 - **Distributed tracing:** Jaeger/Zipkin
-- **Log aggregation:** ELK Stack
-- **APM integration:** New Relic/DataDog
+- **Log aggregáció:** ELK Stack
+- **APM integráció:** New Relic/DataDog
 
-## 🔄 Scalability Architecture
+## 🔄 Skálázhatósági Architektúra
 
-### Horizontal Scaling
-- **Stateless services:** Easy scaling with load balancers
-- **Container orchestration:** Automatic scaling based on load
-- **Database sharding:** Data distribution for large datasets
+### Horizontális Skálázás
+- **Stateless szolgáltatások:** Könnyű skálázás load balancer-ekkel
+- **Konténer orchestráció:** Automatikus skálázás load alapján
+- **Adatbázis sharding:** Adat elosztás nagy adathalmazokhoz
 
-### Performance Optimization
-- **Caching strategy:** Redis for frequently accessed data
-- **CDN integration:** Static asset delivery
-- **Database indexing:** Query performance optimization
-- **Async processing:** Background job queues
+### Teljesítmény Optimalizálás
+- **Cache stratégia:** Redis gyakran elérhető adatokhoz
+- **CDN integráció:** Statikus asset kiszolgálás
+- **Adatbázis indexelés:** Lekérdezés teljesítmény optimalizálás
+- **Async feldolgozás:** Háttér feladat sorok
 
-## 🧪 Testing Architecture
+## 🧪 Tesztelési Architektúra
 
-### Current Testing (POC)
-- **Manual testing:** Through web interface
-- **API testing:** Direct endpoint testing
-- **Integration testing:** Service interaction validation
+### Jelenlegi Tesztelés (POC)
+- **Manuális tesztelés:** Web felületen keresztül
+- **API tesztelés:** Közvetlen endpoint tesztelés
+- **Integrációs tesztelés:** Szerviz interakció validálás
 
-### Production Testing Strategy
-- **Unit tests:** Service-level testing
-- **Integration tests:** Cross-service testing
-- **End-to-end tests:** Full user journey testing
-- **Performance tests:** Load and stress testing
+### Production Tesztelési Stratégia
+- **Unit tesztek:** Szerviz szintű tesztelés
+- **Integrációs tesztek:** Kereszt-szerviz tesztelés
+- **End-to-end tesztek:** Teljes felhasználói út tesztelés
+- **Teljesítmény tesztek:** Load és stress tesztelés
 
-## 📈 Evolution Roadmap
+## 📈 Evolúciós Útiterv
 
-### Phase 1: POC (Current)
-- Basic functionality
-- In-memory storage
-- Single AI provider
-- Manual deployment
+### 1. Fázis: POC (Jelenlegi)
+- Alapvető funkcionalitás
+- In-memory tárolás
+- Egy AI provider
+- Manuális telepítés
 
-### Phase 2: MVP
-- Persistent storage
-- User authentication
-- Multiple AI providers
-- Automated deployment
+### 2. Fázis: MVP
+- Perzisztens tárolás
+- Felhasználói authentikáció
+- Több AI provider
+- Automatizált telepítés
 
-### Phase 3: Production
-- Advanced security
-- Performance optimization
-- Comprehensive monitoring
-- Multi-tenant support
+### 3. Fázis: Production
+- Fejlett biztonság
+- Teljesítmény optimalizálás
+- Átfogó monitorozás
+- Multi-tenant támogatás
 
-### Phase 4: Enterprise
-- Advanced AI features
-- Custom compliance frameworks
-- Advanced reporting
-- Third-party integrations
+### 4. Fázis: Enterprise
+- Fejlett AI funkciók
+- Egyedi compliance keretrendszerek
+- Fejlett riportálás
+- Harmadik fél integrációk
 
-## 🎯 Architecture Trade-offs
+## 🎯 Architektúra Kompromisszumok
 
-### Technology Choices
-| Decision | Rationale | Trade-off |
-|----------|-----------|-----------|
-| Python for Checklist Service | Fast development, good API frameworks | Performance vs compiled languages |
-| Node.js for Evidence Analyzer | AI SDK availability, async processing | Single-threaded limitations |
-| React TypeScript Frontend | Type safety, ecosystem | Learning curve vs plain JavaScript |
-| Docker Compose | Simple deployment, development parity | Production scaling limitations |
+### Technológiai Választások
+| Döntés | Indoklás | Kompromisszum |
+|--------|----------|--------------|
+| Python a Checklist Service-hez | Gyors fejlesztés, jó API keretrendszerek | Teljesítmény vs fordított nyelvek |
+| Node.js az Evidence Analyzer-hez | AI SDK elérhetőség, async feldolgozás | Egyszálú korlátok |
+| React TypeScript Frontend | Típusbiztonság, ökoszisztéma | Tanulási görbe vs plain JavaScript |
+| Docker Compose | Egyszerű telepítés, fejlesztői paritás | Production skálázási korlátok |
 
-### Design Decisions
-| Decision | Rationale | Trade-off |
-|----------|-----------|-----------|
-| In-memory storage | POC simplicity, fast development | Data persistence, scalability |
-| REST APIs | Standardization, tooling | Real-time limitations |
-| Mock AI responses | Demonstration capability | Reduced functionality |
-| No authentication | Simplified development | Security limitations |
+### Tervezési Döntések
+| Döntés | Indoklás | Kompromisszum |
+|--------|----------|--------------|
+| In-memory tárolás | POC egyszerűsége, gyors fejlesztés | Adat perzisztencia, skálázhatóság |
+| REST API-k | Standardizáció, tooling | Real-time korlátok |
+| Mock AI válaszok | Demonstrációs képesség | Csökkentett funkcionalitás |
+| Nincs authentikáció | Egyszerűsített fejlesztés | Biztonsági korlátok |
 
-## 📚 Architectural Patterns Used
+## 📚 Használt Architektúráli Minták
 
-1. **Microservices Pattern:** Service separation by business domain
-2. **API Gateway Pattern:** Single entry point for frontend
-3. **Repository Pattern:** Data access abstraction (future)
-4. **Provider Pattern:** AI service abstraction
-5. **Circuit Breaker Pattern:** AI service failure handling
-6. **Observer Pattern:** Real-time UI updates
+1. **Mikroszerviz Minta:** Szerviz szétválasztás üzleti domain szerint
+2. **API Gateway Minta:** Egyetlen belépési pont a frontend számára
+3. **Repository Minta:** Adat hozzáférés absztrakció (jövő)
+4. **Provider Minta:** AI szolgáltatás absztrakció
+5. **Circuit Breaker Minta:** AI szolgáltatás hiba kezelése
+6. **Observer Minta:** Real-time UI frissítések
 
 ---
 
