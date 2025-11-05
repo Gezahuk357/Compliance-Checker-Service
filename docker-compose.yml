@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   checklist-service:
     build: ./checklist-service
