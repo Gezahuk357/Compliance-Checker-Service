@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { GapAnalysis, Gap } from '../types';
-import { evidenceAnalyzerAPI } from '../services/api';
+import { GapAnalysis as GapAnalysisType, Gap } from '../types';
+import { evidenceAnalyzerAPI } from '../services';
 
 interface GapAnalysisProps {
   checklistId: string;
 }
 
 const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
-  const [gapAnalysis, setGapAnalysis] = useState<GapAnalysis | null>(null);
+  const [gapAnalysis, setGapAnalysis] = useState<GapAnalysisType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

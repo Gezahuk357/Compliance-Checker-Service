@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Checklist, Progress } from './types';
-import { checklistAPI } from './services/api';
-import ChecklistView from './components/ChecklistView';
-import DocumentUpload from './components/DocumentUpload';
-import GapAnalysis from './components/GapAnalysis';
+import { Checklist, Progress, ChecklistItem } from './types';
+import { checklistAPI } from './services';
+import { ChecklistView, DocumentUpload, GapAnalysis } from './components';
 import './App.css';
 
 const App: React.FC = () => {
@@ -55,7 +53,7 @@ const App: React.FC = () => {
       const updatedChecklist = {
         ...selectedChecklist,
         items: selectedChecklist.items.map(item =>
-          item.id === itemId ? { ...item, status } : item
+          item.id === itemId ? { ...item, status: status as 'pending' | 'in_progress' | 'completed' } : item
         )
       };
       setSelectedChecklist(updatedChecklist);

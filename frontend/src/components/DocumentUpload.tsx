@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Checklist, Document, AnalysisResult, MatchResult } from '../types';
-import { evidenceAnalyzerAPI } from '../services/api';
+import { evidenceAnalyzerAPI } from '../services';
 
 interface DocumentUploadProps {
   checklist: Checklist | null;

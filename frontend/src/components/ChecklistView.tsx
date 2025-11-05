@@ -8,7 +8,7 @@ interface ChecklistViewProps {
 }
 
 const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onStatusUpdate }) => {
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: 'pending' | 'in_progress' | 'completed') => {
     switch (status) {
       case 'completed': return '#4CAF50';
       case 'in_progress': return '#FF9800';
