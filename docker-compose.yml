@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   evidence-analyzer:
-    build: ./evidence-analyzer
+    image: evidence-analyzer-fixed:latest
     container_name: evidence-analyzer
     ports:
       - "2002:8002"
