@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   evidence-analyzer:
-    image: evidence-analyzer-fixed:latest
+    build: ./evidence-analyzer
     container_name: evidence-analyzer
     ports:
       - "2002:8002"
@@ -24,8 +24,6 @@ services:
       - AI_PROVIDER=openai
       - AI_API_KEY=${AI_API_KEY:-your-api-key-here}
       - AI_BASE_URL=${AI_BASE_URL:-https://api.openai.com/v1}
-    volumes:
-      - ./evidence-analyzer:/app
     restart: unless-stopped
 
   frontend:

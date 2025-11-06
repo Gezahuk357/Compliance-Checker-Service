@@ -5,7 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
-COPY . .
+COPY src/ ./src/
+COPY public/ ./public/
+COPY tsconfig.json ./
 
 RUN npm run build
 
