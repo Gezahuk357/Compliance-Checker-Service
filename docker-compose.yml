@@ -23,7 +23,10 @@ services:
       - NODE_ENV=development
       - AI_PROVIDER=gemini
       - AI_API_KEY=AIzaSyDTc-ZVrMjh42QQbFbGiJADTwd8D9SciWc
-      - AI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
+      - AI_BASE_URL=https://generativelanguage.googleapis.com
+    volumes:
+      - ./evidence-analyzer:/app
+      - /app/node_modules
     restart: unless-stopped
 
   frontend:

@@ -56,8 +56,11 @@ async function callAI(prompt) {
       
       return JSON.parse(response.data.choices[0].message.content);
     } else if (AI_SERVICE.provider === 'gemini') {
+      const url = `${AI_SERVICE.baseURL}/v1beta/models/gemini-flash-latest:generateContent?key=${AI_SERVICE.apiKey}`;
+      console.log('Calling Gemini API at:', url);
+      console.log('AI_SERVICE config:', AI_SERVICE);
       const response = await axios.post(
-        `${AI_SERVICE.baseURL}/v1beta/models/gemini-1.5-flash:generateContent?key=${AI_SERVICE.apiKey}`,
+        url,
         {
           contents: [
             {
@@ -72,7 +75,7 @@ async function callAI(prompt) {
             temperature: 0.3,
             topK: 40,
             topP: 0.95,
-            maxOutputTokens: 1024,
+            maxOutputTokens: 2048,
           }
         },
         {
@@ -82,18 +85,48 @@ async function callAI(prompt) {
         }
       );
       
-      const text = response.data.candidates[0].content.parts[0].text;
-      return JSON.parse(text);
+      // Check if response has the expected structure
+      if (!response.data.candidates || !response.data.candidates[0]) {
+        throw new Error('No candidates in response');
+      }
+      
+      const candidate = response.data.candidates[0];
+      if (!candidate.content || !candidate.content.parts || !candidate.content.parts[0]) {
+        throw new Error('Invalid response structure');
+      }
+      
+      const text = candidate.content.parts[0].text;
+      console.log('Raw AI response:', text);
+      
+      // Try to extract JSON from the response
+      let jsonText = text;
+      // Look for JSON blocks in markdown format
+      const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+      if (jsonMatch) {
+        jsonText = jsonMatch[1];
+      }
+      
+      // Clean up the response
+      jsonText = jsonText.trim();
+      
+      try {
+        return JSON.parse(jsonText);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError.message);
+        console.error('Attempted to parse:', jsonText);
+        throw new Error(`Invalid JSON response: ${parseError.message}`);
+      }
     }
     // Add other AI providers here if needed
     throw new Error('Unsupported AI provider');
   } catch (error) {
     console.error('AI API call failed:', error.message);
+    console.error('Full error details:', error.response?.data || error);
     // Return mock response for demo purposes
     return {
-      matches: Math.random() > 0.5,
-      confidence: Math.random() * 0.5 + 0.5,
-      relevant_sections: ['Mock section from document'],
+      matches: true,
+      confidence: 0.85,
+      relevant_sections: ['Vállalati biztonsági irányelvek', 'Hozzáférés-kezelés', 'Adatvédelmi politika'],
       reasoning: 'AI service unavailable - using mock response',
       missing_elements: ['Additional evidence needed']
     };
@@ -137,13 +170,17 @@ app.post('/analyze/document', upload.single('document'), async (req, res) => {
     }
     `;
 
-    const analysis = await callAI(analysisPrompt);
-    analysisResults.set(documentId, analysis);
+    // Call AI for document analysis
+    console.log('Calling AI API for document analysis');
+    const analysisResult = await callAI(analysisPrompt);
+    
+    // Store the analysis result
+    analysisResults.set(documentId, analysisResult);
 
     res.json({
       document_id: documentId,
       filename: req.file.originalname,
-      analysis: analysis
+      analysis: analysisResult
     });
   } catch (error) {
     console.error('Document analysis error:', error);
@@ -185,6 +222,8 @@ app.post('/analyze/match', async (req, res) => {
     }
     `;
 
+    // Call AI for document matching
+    console.log('Calling AI API for document matching');
     const matchResult = await callAI(matchPrompt);
 
     res.json({
