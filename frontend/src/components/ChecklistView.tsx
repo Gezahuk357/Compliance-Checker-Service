@@ -8,7 +8,7 @@ interface ChecklistViewProps {
 }
 
 const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onStatusUpdate }) => {
-  const getStatusColor = (status: 'pending' | 'in_progress' | 'completed') => {
+  const getStatusColor = (status: 'Függőben' | 'in_progress' | 'completed') => {
     switch (status) {
       case 'completed': return '#4CAF50';
       case 'in_progress': return '#FF9800';
@@ -55,7 +55,8 @@ const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onSt
                     className="item-status"
                     style={{ backgroundColor: getStatusColor(item.status) }}
                   >
-                    {item.status}
+                    {item.status === 'Függőben' ? 'Függőben' :
+                     item.status === 'in_progress' ? 'Folyamatban' : 'Befejezve'}
                   </span>
                 </div>
                 <div className="item-requirement">{item.requirement}</div>
@@ -75,7 +76,7 @@ const ChecklistView: React.FC<ChecklistViewProps> = ({ checklist, progress, onSt
                     onChange={(e) => onStatusUpdate(item.id, e.target.value)}
                     className="status-select"
                   >
-                    <option value="pending">Függőben</option>
+                    <option value="Függőben">Függőben</option>
                     <option value="in_progress">Folyamatban</option>
                     <option value="completed">Befejezve</option>
                   </select>

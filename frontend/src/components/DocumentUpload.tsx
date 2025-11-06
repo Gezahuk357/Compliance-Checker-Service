@@ -40,7 +40,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
 
         // Try to match against checklist items
         for (const item of checklist.items) {
-          if (item.status === 'pending') {
+          if (item.status === 'Függőben') {
             try {
               const match = await evidenceAnalyzerAPI.matchDocument(
                 analysis.document_id,

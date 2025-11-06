@@ -53,7 +53,7 @@ const App: React.FC = () => {
       const updatedChecklist = {
         ...selectedChecklist,
         items: selectedChecklist.items.map(item =>
-          item.id === itemId ? { ...item, status: status as 'pending' | 'in_progress' | 'completed' } : item
+          item.id === itemId ? { ...item, status: status as 'Függőben' | 'in_progress' | 'completed' } : item
         )
       };
       setSelectedChecklist(updatedChecklist);

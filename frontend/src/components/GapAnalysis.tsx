@@ -82,7 +82,9 @@ const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
                   className="gap-priority"
                   style={{ backgroundColor: getPriorityColor(gap.priority) }}
                 >
-                  {gap.priority.toUpperCase()}
+                  {gap.priority === 'critical' ? 'KRITIKUS' :
+                   gap.priority === 'high' ? 'MAGAS' :
+                   gap.priority === 'medium' ? 'KÖZEPES' : 'ALACSONY'}
                 </span>
               </div>
               

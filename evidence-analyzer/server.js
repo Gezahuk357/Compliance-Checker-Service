@@ -246,17 +246,17 @@ app.get('/analyze/gaps', async (req, res) => {
     const gaps = [
       {
         requirement_id: "AC-2",
-        requirement: "User access reviews quarterly",
-        status: "pending",
+        requirement: "Felhasználói hozzáférések negyedévente felülvizsgálva",
+        status: "Függőben",
         priority: "high",
-        suggested_evidence: ["User access review reports", "Access review meeting minutes"]
+        suggested_evidence: ["Felhasználói hozzáférés felülvizsgálati jelentések", "Hozzáférés felülvizsgálati jegyzőkönyvek"]
       },
       {
         requirement_id: "IM-1",
-        requirement: "Incident response plan documented",
-        status: "pending",
+        requirement: "Incidensválasz-terv dokumentálva",
+        status: "Függőben",
         priority: "critical",
-        suggested_evidence: ["Incident response plan document", "Emergency contact list"]
+        suggested_evidence: ["Incidensválasz-terv dokumentum", "Vészhelyzeti kapcsolattartási lista"]
       }
     ];
 
@@ -281,17 +281,17 @@ app.get('/analyze/gaps/report', async (req, res) => {
     const gaps = [
       {
         requirement_id: "AC-2",
-        requirement: "User access reviews quarterly",
-        status: "pending",
+        requirement: "Felhasználói hozzáférések negyedévente felülvizsgálva",
+        status: "Függőben",
         priority: "high",
-        suggested_evidence: ["User access review reports", "Access review meeting minutes"]
+        suggested_evidence: ["Felhasználói hozzáférés felülvizsgálati jelentések", "Hozzáférés felülvizsgálati jegyzőkönyvek"]
       },
       {
         requirement_id: "IM-1",
-        requirement: "Incident response plan documented",
-        status: "pending",
+        requirement: "Incidensválasz-terv dokumentálva",
+        status: "Függőben",
         priority: "critical",
-        suggested_evidence: ["Incident response plan document", "Emergency contact list"]
+        suggested_evidence: ["Incidensválasz-terv dokumentum", "Vészhelyzeti kapcsolattartási lista"]
       }
     ];
 
@@ -309,17 +309,17 @@ app.get('/analyze/gaps/report', async (req, res) => {
     const mockGaps = [
       {
         requirement_id: "AC-2",
-        requirement: "User access reviews quarterly",
-        status: "pending",
+        requirement: "Felhasználói hozzáférések negyedévente felülvizsgálva",
+        status: "Függőben",
         priority: "high",
-        suggested_evidence: ["User access review reports", "Access review meeting minutes"]
+        suggested_evidence: ["Felhasználói hozzáférés felülvizsgálati jelentések", "Hozzáférés felülvizsgálati jegyzőkönyvek"]
       },
       {
         requirement_id: "IM-1",
-        requirement: "Incident response plan documented",
-        status: "pending",
+        requirement: "Incidensválasz-terv dokumentálva",
+        status: "Függőben",
         priority: "critical",
-        suggested_evidence: ["Incident response plan document", "Emergency contact list"]
+        suggested_evidence: ["Incidensválasz-terv dokumentum", "Vészhelyzeti kapcsolattartási lista"]
       }
     ];
 

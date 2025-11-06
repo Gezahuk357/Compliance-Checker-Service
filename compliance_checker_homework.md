@@ -37,7 +37,7 @@ Compliance követelmények kezelése
       "category": "Access Control",
       "requirement": "Password policy documented and enforced",
       "hints": ["password policy", "security guidelines"],
-      "status": "pending",
+      "status": "Függőben",
       "evidence": []
     }
   ]

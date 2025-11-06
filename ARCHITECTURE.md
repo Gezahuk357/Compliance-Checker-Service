@@ -114,7 +114,7 @@ ChecklistItem {
   category: string
   requirement: string
   hints: string[]
-  status: "pending" | "in_progress" | "completed"
+  status: "Függőben" | "in_progress" | "completed"
   evidence: string[]
 }
 ```

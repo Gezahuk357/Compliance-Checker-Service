@@ -21,7 +21,7 @@ class ChecklistItem(BaseModel):
     category: str
     requirement: str
     hints: List[str]
-    status: str = "pending"
+    status: str = "Függőben"
     evidence: List[str] = []
 
 class Checklist(BaseModel):
@@ -37,70 +37,70 @@ class StatusUpdate(BaseModel):
 checklists = {
     "iso-27001-simplified": {
         "id": "iso-27001-simplified",
-        "name": "ISO 27001 Essential Controls",
+        "name": "ISO 27001 Alapvető Vezérlőelemek",
         "items": [
             {
                 "id": "AC-1",
-                "category": "Access Control",
-                "requirement": "Password policy documented and enforced",
-                "hints": ["password policy", "security guidelines"],
-                "status": "pending",
+                "category": "Hozzáférés-vezérlés",
+                "requirement": "Jelszószabályzat dokumentálva és érvényesítve",
+                "hints": ["jelszószabályzat", "biztonsági irányelvek"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "AC-2",
-                "category": "Access Control",
-                "requirement": "User access reviews quarterly",
-                "hints": ["access review", "user permissions"],
-                "status": "pending",
+                "category": "Hozzáférés-vezérlés",
+                "requirement": "Felhasználói hozzáférések negyedévente felülvizsgálva",
+                "hints": ["hozzáférés felülvizsgálat", "felhasználói jogosultságok"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "AC-3",
-                "category": "Access Control",
-                "requirement": "Admin access logged",
-                "hints": ["admin logging", "privilege access"],
-                "status": "pending",
+                "category": "Hozzáférés-vezérlés",
+                "requirement": "Adminisztrátori hozzáférés naplózva",
+                "hints": ["admin naplózás", "privilégium hozzáférés"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "IM-1",
-                "category": "Incident Management",
-                "requirement": "Incident response plan documented",
-                "hints": ["incident response", "emergency plan"],
-                "status": "pending",
+                "category": "Incidenskezelés",
+                "requirement": "Incidensválasz-terv dokumentálva",
+                "hints": ["incidensválasz", "vészhelyzeti terv"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "IM-2",
-                "category": "Incident Management",
-                "requirement": "Incident log maintained",
-                "hints": ["incident log", "tracking"],
-                "status": "pending",
+                "category": "Incidenskezelés",
+                "requirement": "Incidensnapló vezetve",
+                "hints": ["incidensnapló", "követés"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "DP-1",
-                "category": "Data Protection",
-                "requirement": "Backup policy defined",
-                "hints": ["backup policy", "data recovery"],
-                "status": "pending",
+                "category": "Adatvédelem",
+                "requirement": "Biztonsági mentési szabályzat meghatározva",
+                "hints": ["biztonsági mentési szabályzat", "adat-helyreállítás"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "DP-2",
-                "category": "Data Protection",
-                "requirement": "Encryption standards documented",
-                "hints": ["encryption", "security standards"],
-                "status": "pending",
+                "category": "Adatvédelem",
+                "requirement": "Titkosítási szabványok dokumentálva",
+                "hints": ["titkosítás", "biztonsági szabványok"],
+                "status": "Függőben",
                 "evidence": []
             },
             {
                 "id": "DP-3",
-                "category": "Data Protection",
-                "requirement": "Data retention policy exists",
-                "hints": ["data retention", "policy"],
-                "status": "pending",
+                "category": "Adatvédelem",
+                "requirement": "Adatmegőrzési szabályzat létezik",
+                "hints": ["adatmegőrzés", "szabályzat"],
+                "status": "Függőben",
                 "evidence": []
             }
         ]
