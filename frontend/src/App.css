@@ -329,6 +329,11 @@
   border-top: 1px solid #dee2e6;
 }
 
+.footer-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .refresh-btn {
   background-color: #007bff;
   color: white;
@@ -341,6 +346,20 @@
 
 .refresh-btn:hover {
   background-color: #0056b3;
+}
+
+.download-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.download-btn:hover {
+  background-color: #218838;
 }
 
 /* Responsive Design */

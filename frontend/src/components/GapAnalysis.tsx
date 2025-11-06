@@ -113,9 +113,17 @@ const GapAnalysis: React.FC<GapAnalysisProps> = ({ checklistId }) => {
             Elemzés végrehajtva: {new Date(gapAnalysis.analyzed_at).toLocaleString()}
           </small>
         </p>
-        <button onClick={loadGapAnalysis} className="refresh-btn">
-          Elemzés Frissítése
-        </button>
+        <div className="footer-buttons">
+          <button onClick={loadGapAnalysis} className="refresh-btn">
+            Elemzés Frissítése
+          </button>
+          <button
+            onClick={() => evidenceAnalyzerAPI.downloadGapReport(checklistId)}
+            className="download-btn"
+          >
+            Jelentés Letöltése
+          </button>
+        </div>
       </div>
     </div>
   );
