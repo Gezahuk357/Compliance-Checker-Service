@@ -177,6 +177,11 @@
   text-align: left;
 }
 
+.document-actions {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
 .dropzone {
   border: 2px dashed #007bff;
   border-radius: 8px;
@@ -211,9 +216,41 @@
   margin-bottom: 20px;
 }
 
-.document-card h4 {
-  color: #495057;
+.document-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 15px;
+}
+
+.document-header h4 {
+  color: #495057;
+  margin: 0;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.loading-documents {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
 }
 
 .analysis-result {

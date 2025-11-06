@@ -62,6 +62,10 @@ export const evidenceAnalyzerAPI = {
     return response.data;
   },
 
+  deleteDocument: async (documentId: string): Promise<void> => {
+    await axios.delete(`${EVIDENCE_ANALYZER_URL}/analyze/documents/${documentId}`);
+  },
+
   downloadGapReport: async (checklistId: string): Promise<void> => {
     const response = await axios.get(`${EVIDENCE_ANALYZER_URL}/analyze/gaps/report?checklist_id=${checklistId}`, {
       responseType: 'blob'

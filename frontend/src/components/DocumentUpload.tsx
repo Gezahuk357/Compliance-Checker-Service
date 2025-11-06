@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Checklist, Document, AnalysisResult, MatchResult } from '../types';
 import { evidenceAnalyzerAPI } from '../services';
@@ -13,6 +13,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
   const [uploadedDocuments, setUploadedDocuments] = useState<Document[]>([]);
   const [analysisResults, setAnalysisResults] = useState<Record<string, AnalysisResult>>({});
   const [matchingResults, setMatchingResults] = useState<Record<string, MatchResult>>({});
+  const [loading, setLoading] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (!checklist) return;
@@ -71,6 +72,68 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
     }
   }, [checklist, onStatusUpdate]);
 
+  // Load existing documents on component mount
+  useEffect(() => {
+    loadExistingDocuments();
+  }, []);
+
+  const loadExistingDocuments = async () => {
+    try {
+      console.log('Loading existing documents...');
+      setLoading(true);
+      const response = await evidenceAnalyzerAPI.getDocuments();
+      console.log('Documents response:', response);
+      
+      // Set documents
+      setUploadedDocuments(response.documents);
+      
+      // Set analysis results from server
+      const serverAnalysisResults: Record<string, AnalysisResult> = {};
+      response.documents.forEach((doc: any) => {
+        if (doc.analysis) {
+          serverAnalysisResults[doc.id] = doc.analysis;
+        }
+      });
+      setAnalysisResults(serverAnalysisResults);
+      
+      console.log('Documents set:', response.documents);
+      console.log('Analysis results set:', serverAnalysisResults);
+    } catch (error) {
+      console.error('Failed to load existing documents:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteDocument = async (documentId: string) => {
+    try {
+      await evidenceAnalyzerAPI.deleteDocument(documentId);
+      
+      // Remove from local state
+      setUploadedDocuments(prev => prev.filter(doc => doc.id !== documentId));
+      
+      // Clean up analysis results
+      setAnalysisResults(prev => {
+        const newResults = { ...prev };
+        delete newResults[documentId];
+        return newResults;
+      });
+      
+      // Clean up matching results
+      setMatchingResults(prev => {
+        const newResults = { ...prev };
+        Object.keys(newResults).forEach(key => {
+          if (key.startsWith(documentId)) {
+            delete newResults[key];
+          }
+        });
+        return newResults;
+      });
+    } catch (error) {
+      console.error('Failed to delete document:', error);
+    }
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -99,12 +162,37 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
         )}
       </div>
 
+      <div className="document-actions">
+        <button
+          className="refresh-btn"
+          onClick={loadExistingDocuments}
+          disabled={loading}
+        >
+          {loading ? 'Betöltés...' : 'Dokumentumok frissítése'}
+        </button>
+      </div>
+
+      {loading && (
+        <div className="loading-documents">
+          <p>Dokumentumok betöltése...</p>
+        </div>
+      )}
+      
       {uploadedDocuments.length > 0 && (
         <div className="uploaded-documents">
           <h3>Feltöltött Dokumentumok</h3>
           {uploadedDocuments.map(doc => (
             <div key={doc.id} className="document-card">
-              <h4>{doc.filename}</h4>
+              <div className="document-header">
+                <h4>{doc.filename}</h4>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteDocument(doc.id)}
+                  title="Dokumentum törlése"
+                >
+                  ✕
+                </button>
+              </div>
               {analysisResults[doc.id] && (
                 <div className="analysis-result">
                   <p><strong>Dokumentum Típus:</strong> {analysisResults[doc.id].document_type || 'Ismeretlen'}</p>

@@ -412,17 +412,44 @@ Ez a jelentés automatikusan generálódott a Compliance Checker Service által.
 
 // GET /analyze/documents - List all analyzed documents
 app.get('/analyze/documents', (req, res) => {
-  const documentList = Array.from(documents.values()).map(doc => ({
-    id: doc.id,
-    filename: doc.filename,
-    uploaded_at: doc.uploadedAt,
-    has_analysis: analysisResults.has(doc.id)
-  }));
+  const documentList = Array.from(documents.values()).map(doc => {
+    const analysis = analysisResults.get(doc.id);
+    return {
+      id: doc.id,
+      filename: doc.filename,
+      uploaded_at: doc.uploadedAt,
+      has_analysis: analysisResults.has(doc.id),
+      analysis: analysis || null
+    };
+  });
 
   res.json({
     documents: documentList,
     total_count: documentList.length
   });
+});
+
+// DELETE /analyze/documents/:id - Delete a document
+app.delete('/analyze/documents/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    if (!documents.has(id)) {
+      return res.status(404).json({ error: 'Document not found' });
+    }
+    
+    // Remove document and its analysis results
+    documents.delete(id);
+    analysisResults.delete(id);
+    
+    res.json({
+      message: 'Document deleted successfully',
+      document_id: id
+    });
+  } catch (error) {
+    console.error('Document deletion error:', error);
+    res.status(500).json({ error: 'Failed to delete document' });
+  }
 });
 
 // Health check endpoint
