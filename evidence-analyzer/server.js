@@ -462,6 +462,191 @@ app.get('/health', (req, res) => {
   });
 });
 
+// POST /analyze/mapping - Generate ISO 27001 Essential Controls mapping from document
+app.post('/analyze/mapping', async (req, res) => {
+  try {
+    const { document_id } = req.body;
+
+    if (!documents.has(document_id)) {
+      return res.status(404).json({ error: 'Document not found' });
+    }
+
+    const document = documents.get(document_id);
+    const documentText = document.content;
+
+    // Get all ISO 27001 Essential Controls items
+    const checklistResponse = await axios.get('http://checklist-service:8001/checklists/iso-27001-simplified');
+    const checklistItems = checklistResponse.data.items;
+
+    // Generate mapping for each control item
+    const mappingResults = [];
+    
+    for (const item of checklistItems) {
+      const matchPrompt = `
+      Analyze if this document provides evidence for the compliance requirement.
+      
+      DOCUMENT CONTENT:
+      ${documentText.substring(0, 1500)}
+      
+      REQUIREMENT:
+      ${item.requirement}
+      
+      HINTS FOR MATCHING:
+      ${item.hints ? item.hints.join(', ') : ''}
+      
+      Return JSON:
+      {
+        "matches": boolean,
+        "confidence": 0.0-1.0,
+        "relevant_sections": ["array of relevant quotes (max 2)"],
+        "reasoning": "brief explanation",
+        "missing_elements": "what's still needed"
+      }
+      `;
+
+      // Call AI for document matching
+      console.log(`Calling AI API for document matching - ${item.id}`);
+      const matchResult = await callAI(matchPrompt);
+
+      mappingResults.push({
+        control_id: item.id,
+        category: item.category,
+        requirement: item.requirement,
+        matches: matchResult.matches,
+        confidence: matchResult.confidence,
+        relevant_sections: matchResult.relevant_sections,
+        reasoning: matchResult.reasoning,
+        missing_elements: matchResult.missing_elements,
+        source_document: document.filename
+      });
+    }
+
+    // Generate summary report
+    const matchedItems = mappingResults.filter(item => item.matches);
+    const unmatchedItems = mappingResults.filter(item => !item.matches);
+    
+    const reportContent = generateMappingReport(mappingResults, document);
+
+    res.json({
+      document_id: document_id,
+      document_filename: document.filename,
+      total_controls: mappingResults.length,
+      matched_controls: matchedItems.length,
+      unmatched_controls: unmatchedItems.length,
+      mapping_results: mappingResults,
+      report_content: reportContent,
+      analyzed_at: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Document mapping error:', error);
+    res.status(500).json({ error: 'Failed to generate document mapping' });
+  }
+});
+
+// Helper function to generate mapping report content
+function generateMappingReport(mappingResults, document) {
+  const reportDate = new Date().toLocaleString('hu-HU');
+  const matchedItems = mappingResults.filter(item => item.matches);
+  const unmatchedItems = mappingResults.filter(item => !item.matches);
+
+  let report = `ISO 27001 ESSENTIAL CONTROLS LEKÉPEZÉS JELENTÉS
+=====================================================
+
+Forrás dokumentum: ${document.filename}
+Dokumentum ID: ${document.id}
+Jelentés dátuma: ${reportDate}
+
+ÖSSZESZEDÉS:
+- Összes ellenőrzött tétel: ${mappingResults.length}
+- Megfelelő tételek: ${matchedItems.length}
+- Nem megfelelő tételek: ${unmatchedItems.length}
+- Megfelelési arány: ${((matchedItems.length / mappingResults.length) * 100).toFixed(2)}%
+
+RÉSZLETES LEKÉPEZÉS:
+====================
+
+`;
+
+  // Add matched items
+  if (matchedItems.length > 0) {
+    report += `MEGFELELŐ TÉTELEK (${matchedItems.length} db):
+-----------------------------------\n\n`;
+    
+    matchedItems.forEach((item, index) => {
+      report += `${index + 1}. Tétel: ${item.control_id} [${item.category}]
+   Követelmény: ${item.requirement}
+   Bizonyossági szint: ${(item.confidence * 100).toFixed(0)}%
+   Indoklás: ${item.reasoning}
+   Forrás dokumentum: ${item.source_document}
+   
+   Releváns szakaszok:\n`;
+      item.relevant_sections.forEach(section => {
+        report += `   - "${section}"\n`;
+      });
+      report += `\n`;
+    });
+  }
+
+  // Add unmatched items
+  if (unmatchedItems.length > 0) {
+    report += `NEM MEGFELELŐ TÉTELEK (${unmatchedItems.length} db):
+---------------------------------------\n\n`;
+    
+    unmatchedItems.forEach((item, index) => {
+      report += `${index + 1}. Tétel: ${item.control_id} [${item.category}]
+   Követelmény: ${item.requirement}
+   Indoklás: ${item.reasoning}
+   Hiányzó elemek: ${item.missing_elements}
+   Forrás dokumentum: ${item.source_document}
+   
+   Javaslatok:\n`;
+      item.missing_elements.split(',').forEach(element => {
+        report += `   - ${element.trim()}\n`;
+      });
+      report += `\n`;
+    });
+  }
+
+  report += `
+ÖSSZEGZÉS ÉS JAVASLATOK:
+========================
+
+A dokumentum elemzése alapján az alábbi megállapításokat tehetjük:
+
+1. ERŐSSÉGEK:
+   - A dokumentum ${matchedItems.length} ISO 27001 Essential Controls tételnek felel meg
+   - Kiemelkedően kezeli a következő területeket: ${getTopCategories(matchedItems).join(', ')}
+
+2. GYENGESÉGEK:
+   - ${unmatchedItems.length} tétel esetében hiányos a dokumentáció
+   - Kiegészítésre szoruló területek: ${getTopCategories(unmatchedItems).join(', ')}
+
+3. JAVASOLT INTÉZKEDÉSEK:
+   - Hiányzó dokumentumok készítése a nem megfelelő tételekhez
+   - Meglévő dokumentumok kiegészítése a hiányzó elemekkel
+   - Rendszeres felülvizsgálat és frissítés
+
+Ez a jelentés automatikusan generálódott a Compliance Checker Service által.
+`;
+
+  return report;
+}
+
+// Helper function to get top categories from items
+function getTopCategories(items) {
+  const categoryCount = {};
+  items.forEach(item => {
+    if (!categoryCount[item.category]) {
+      categoryCount[item.category] = 0;
+    }
+    categoryCount[item.category]++;
+  });
+  
+  return Object.keys(categoryCount)
+    .sort((a, b) => categoryCount[b] - categoryCount[a])
+    .slice(0, 3);
+}
+
 app.listen(PORT, () => {
   console.log(`Evidence Analyzer Service running on port ${PORT}`);
 });
