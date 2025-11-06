@@ -1,0 +1,233 @@
+VÁLLALATI BIZTONSÁGI IRÁNYELV ÉS ELJÁRÁSOK
+Verzió: 2.0
+Dátum: 2025.11.06
+Készítette: IT Biztonsági Osztály
+Jóváhagyta: Vezérigazgató
+
+1. BEVEZETÉS
+1.1 Célkitűzés
+Ez a dokumentum meghatározza a Vállalat információbiztonsági politikáját és eljárásait, amelyek biztosítják a szervezeti eszközök, adatok és rendszerek védelmét a jogosulatlan hozzáféréstől, felhasználástól, módosítástól, megsemmisítéstől és szivárgástól.
+
+1.2 Hatály
+Ez a politika minden Vállalati alkalmazottra, vezetőre, beszállítóra és partnerre vonatkozik, akik hozzáférnek a Vállalat információs rendszereihez vagy adatbázisaihoz.
+
+1.3 Jogszabályi megfelelőség
+A Vállalat megfelel az alábbi jogszabályoknak és szabványoknak:
+- GDPR (Általos Adatvédelmi Rendelet)
+- ISO 27001:2022 Információbiztonsági irányítési rendszer
+- Kiberbiztonsági törvény
+- Személyes adatok védelméről szóló törvény
+
+2. HOZZÁFÉRÉS KEZELÉSE
+2.1 Felhasználói hozzáférés
+2.1.1 Felhasználói fiókok létrehozása
+- Minden felhasználónak egyedi azonosítóval kell rendelkeznie
+- A felhasználói fiókokat csak a szükséges minimális jogosultságokkal kell ellátni
+- A fiókok létrehozásához írásbeli kérelemre van szükség a felettes jóváhagyásával
+
+2.1.2 Jelszavas politika
+- Minimum 8 karakter hosszúság
+- Tartalmaznia kell nagybetűt, kisbetűt, számot és speciális karaktert
+- Jelszavakat 90 naponta kötelező megváltoztatni
+- Az elmúlt 5 jelszó nem használható újra
+- A fiókok zárolása 3 sikertelen bejelentkezés után
+
+2.1.3 Hozzáférés felülvizsgálata
+- Negyedévente felül kell vizsgálni minden felhasználói hozzáférést
+- A nem szükséges hozzáféréseket haladéktalanul meg kell szüntetni
+- A rendszergazdai jogosultságokat különösen szigorúan kell kezelni
+
+2.2 Távoli hozzáférés
+2.2.1 VPN használat
+- Minden távoli hozzáféréshez VPN kapcsolat kötelező
+- Két-faktoros hitelesítés szükséges a VPN-hez
+- A VPN kapcsolatok naplózása és monitorozása kötelező
+
+2.2.2 Mobil eszközök
+- Céges mobil eszközökre Mobile Device Management (MDM) szoftver telepítése kötelező
+- BYOD (Bring Your Own Device) eszközökre külön regisztráció és jóváhagyás szükséges
+- Elveszett vagy ellopott eszközöket haladéktalanul jelenteni kell
+
+3. ADATKEZELÉS ÉS VÉDELEM
+3.1 Adatbesorolás
+3.1.1 Személyes adatok
+- Személyes adatok kezelése csak adatkezelési tájékoztató alapján lehetséges
+- Az adatok tárolásának időkorlátot kell megállapítani
+- Adatkezelők nyilvántartását vezetni kell
+
+3.1.2 Bizalmas adatok
+- Bizalmas adatok titkosítása kötelező
+- Adatátvitel csak titkosított csatornán keresztül engedélyezett
+- Papír alapú bizalmas dokumentumok biztonságos tárolása
+
+3.2 Adatmentés
+3.2.1 Mentési stratégia
+- Napi mentés minden kritikus rendszerről
+- Helyreállítási pont cél (RPO): maximum 4 óra
+- Helyreállítási idő cél (RTO): maximum 8 óra
+- Mentések offshore tárolása
+
+3.2.2 Mentés ellenőrzése
+- Heti mentésellenőrzés és helyreállítási tesztek
+- Mentési naplók vezetése és archiválása
+- Mentési incidensek jelentése és kezelése
+
+4. INKIDENCIÁS KEZELÉS
+4.1 Incidens jelentés
+4.1.1 Jelentési folyamat
+- Minden biztonsági incidenst haladéktalanul jelenteni kell
+- Jelentési csatorna: security@company.com és 24/7 telefonos vonal
+- Incidensek besorolása: kritikus, magas, közepes, alacsony
+
+4.1.2 Incidens válaszcsapat
+- 24/7 rendelkezésre álló incidens válaszcsapat
+- Szakértői csapat: IT biztonság, jog, kommunikáció, vezetés
+- Külső szakértők bevonása szükség esetén
+
+4.2 Incidens kezelési eljárások
+4.2.1 Kritikus incidensek
+- Azonnali értesítés a vezetőségnek
+- Rendszerek lekapcsolása a hálózatról
+- Hatósági értesítés 72 órán belül (adatvédelmi incidensek esetén)
+
+4.2.2 Dokumentáció
+- Részletes incidens napló vezetése
+- Idővonal dokumentálása percre pontosan
+- Tanulságok levonása és javító intézkedések
+
+5. FIZIKAI BIZTONSÁG
+5.1 Hozzáférés-vezérlés
+5.1.1 Épületbiztonság
+- Beléptetőrendszer működtetése
+- Látogatók regisztrációja és kísérése
+- Biztonsági őrök 24/7 jelenléte
+
+5.1.2 Szerverterem
+- Csak授权人员 (authorized personnel) léphetnek be
+- Hozzáférés-vezérlő kártya használata
+- Kamerás megfigyelés és naplózás
+
+5.2 Eszközök védelme
+5.2.1 Laptopok és mobil eszközök
+- Titkosítás telepítése minden céges eszközre
+- Lopásvédelem szoftver használata
+- Eszközök regisztrálása és leltározása
+
+5.2.2 Papír dokumentumok
+- Biztonságos széf használata
+- Dokumentumok megsemmisítése biztonságos módon
+- Hozzáférés-vezérlés és kölcsönzési napló
+
+6. KOMMUNIKÁCIÓS BIZTONSÁG
+6.1 Hálózatbiztonság
+6.1.1 Tűzfal konfiguráció
+- Alapértelmezett szerinti tiltás (deny by default) politika
+- Szükséges portok és protokollok engedélyezése
+- Tűzfalszabályok rendszeres felülvizsgálata
+
+6.1.2 Hálózat monitorozás
+- 24/7 hálózatfigyelés és incidens észlelés
+- Anomáliák detektálása és jelentése
+- Sávszélesség-figyelés és optimalizálás
+
+6.2 Email biztonság
+6.2.1 Spam és vírusvédelem
+- Email szűrő rendszer működtetése
+- Vírusdefiníciók naponta frissítése
+- Phishing védelem és felhasználói oktatás
+
+6.2.2 Email titkosítás
+- Külső partnerekkel való kommunikáció titkosítása
+- Digitális aláírás használata hitelesítéskor
+- Email archiválás és megőrzési szabályok
+
+7. KOCKALATKEZELÉS
+7.1 Kockázatértékelés
+7.1.1 Rendszeres kockázatértékelés
+- Évente teljes körű kockázatértékelés végrehajtása
+- Új rendszerek bevezetése előtt kockázatelemzés
+- Kockázati mátrix és kezelési stratégia
+
+7.1.2 Kockázatkezelési intézkedések
+- Kockázatok csökkentése, átadása vagy elfogadása
+- Intézkedések hatékonyságának mérése
+- Maradék kockázatok kezelése és monitorozása
+
+7.2 Vállalati folytonosság
+7.2.1 Üzletmenet-folytonosság tervezés
+- Kritikus folyamatok azonosítása
+- Vészhelyzeti tervek készítése
+- Rendszeres tesztelés és frissítés
+
+7.2.2 Vészhelyzeti helyreállítás
+- Alternátív munkahelyek kijelölése
+- Adatmentések és rendszerek helyreállítása
+- Kommunikációs tervek vészhely esetére
+
+8. MEGFELELŐSÉG ÉS AUDIT
+8.1 Belső audit
+8.1.1 Rendszeres ellenőrzések
+- Negyedéves belső auditok végrehajtása
+- Biztonsági irányelvek betartásának ellenőrzése
+- Hiányosságok azonosítása és javítása
+
+8.1.2 Audit jelentések
+- Részletes audit jelentések készítése
+- Javító intézkedési tervek kidolgozása
+- Vezetőség tájékoztatása az audit eredményeiről
+
+8.2 Külső audit és tanúsítás
+8.2.1 ISO 27001 tanúsítás
+- Éves külső audit a tanúsítás fenntartásához
+- Nem megfelelőségek kezelése és korrekciója
+- Folyamatos fejlesztés és javítás
+
+8.2.2 Jogi megfelelőség
+- Szabályozói auditok végrehajtása
+- Jelentések készítése hatóságok számára
+- Szankciók és bírságok kezelése
+
+9. KÉPZÉS ÉS TUDATOSÍTÁS
+9.1 Biztonsági tudatosság
+9.1.1 Alkalmazotti képzések
+- Éves biztonsági képzés minden alkalmazottnak
+- Új alkalmazottak bevezető képzése
+- Szakspecifikus biztonsági képzések
+
+9.1.2 Phishing védelem
+- Rendszeres phishing szimulációk
+- Eredmények elemzése és további képzések
+- Tudatosság-növelő kampányok
+
+9.2 Szakmai képzések
+9.2.1 IT biztonsági szakemberek
+- Szakmai tanúsítások támogatása
+- Konferenciákon való részvétel
+- Legújabb trendek és technológiák követése
+
+10. DOKUMENTUMKEZELÉS
+10.1 Irányelvek frissítése
+10.1.1 Verziókezelés
+- Minden változás verziószámozása és dátumozása
+- Változásnapló vezetése
+- Korábbi verziók archiválása
+
+10.1.2 Felülvizsgálat
+- Éves felülvizsgalat és frissítés
+- Változó jogszabályi környezetnek megfelelő módosítások
+- Technológiai változásoknak való alkalmazkodás
+
+10.2 Dokumentáció tárolása
+10.2.1 Biztonságos tárolás
+- Hozzáférés-vezérlés a biztonsági dokumentumokra
+- Biztonsági mentés és archiválás
+- Változáskezelési folyamatok
+
+EZ A DOKUMENTUM VÁLLALATI BIZTONSÁGI IRÁNYELV, AMELYNEK BETARTÁSA MINDEN ALKALMAZOTTRA KÖTELEZŐ.
+A DOKUMENTUM MEGTALÁLHATÓ A VÁLLALAT BELSŐ DOKUMENTUMTÁRÁBAN ÉS A BIZTONSÁGI PORTÁLON.
+
+Jóváhagyom:
+_________________________
+Név: Dr. Kovács János
+Beosztás: Vezérigazgató
+Dátum: 2025.11.06

@@ -21,9 +21,9 @@ const analysisResults = new Map();
 
 // AI Service Configuration
 const AI_SERVICE = {
-  provider: process.env.AI_PROVIDER || 'openai',
-  apiKey: process.env.AI_API_KEY || 'your-api-key-here',
-  baseURL: process.env.AI_BASE_URL || 'https://api.openai.com/v1'
+  provider: process.env.AI_PROVIDER || 'gemini', // 'openai' or 'gemini'
+  apiKey: process.env.AI_API_KEY || 'AIzaSyDTc-ZVrMjh42QQbFbGiJADTwd8D9SciWc',
+  baseURL: process.env.AI_BASE_URL || 'https://generativelanguage.googleapis.com'
 };
 
 // Helper function to call AI API
@@ -55,6 +55,35 @@ async function callAI(prompt) {
       );
       
       return JSON.parse(response.data.choices[0].message.content);
+    } else if (AI_SERVICE.provider === 'gemini') {
+      const response = await axios.post(
+        `${AI_SERVICE.baseURL}/v1beta/models/gemini-1.5-flash:generateContent?key=${AI_SERVICE.apiKey}`,
+        {
+          contents: [
+            {
+              parts: [
+                {
+                  text: `You are a compliance analysis expert. Always respond with valid JSON.\n\n${prompt}`
+                }
+              ]
+            }
+          ],
+          generationConfig: {
+            temperature: 0.3,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 1024,
+          }
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      const text = response.data.candidates[0].content.parts[0].text;
+      return JSON.parse(text);
     }
     // Add other AI providers here if needed
     throw new Error('Unsupported AI provider');

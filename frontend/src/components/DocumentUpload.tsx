@@ -107,12 +107,12 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ checklist, onStatusUpda
               <h4>{doc.filename}</h4>
               {analysisResults[doc.id] && (
                 <div className="analysis-result">
-                  <p><strong>Dokumentum Típus:</strong> {analysisResults[doc.id].document_type}</p>
-                  <p><strong>Teljesség Pontszám:</strong> {(analysisResults[doc.id].completeness_score * 100).toFixed(1)}%</p>
+                  <p><strong>Dokumentum Típus:</strong> {analysisResults[doc.id].document_type || 'Ismeretlen'}</p>
+                  <p><strong>Teljesség Pontszám:</strong> {analysisResults[doc.id].completeness_score ? ((analysisResults[doc.id].completeness_score * 100).toFixed(1) + '%') : 'Nem elérhető'}</p>
                   <div className="security-controls">
                     <strong>Biztonsági Vezérlők:</strong>
                     <ul>
-                      {analysisResults[doc.id].security_controls.map((control, index) => (
+                      {(analysisResults[doc.id].security_controls || []).map((control, index) => (
                         <li key={index}>{control}</li>
                       ))}
                     </ul>

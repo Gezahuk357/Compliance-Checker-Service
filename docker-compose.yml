@@ -21,9 +21,9 @@ services:
       - compliance-network
     environment:
       - NODE_ENV=development
-      - AI_PROVIDER=openai
-      - AI_API_KEY=${AI_API_KEY:-your-api-key-here}
-      - AI_BASE_URL=${AI_BASE_URL:-https://api.openai.com/v1}
+      - AI_PROVIDER=gemini
+      - AI_API_KEY=AIzaSyDTc-ZVrMjh42QQbFbGiJADTwd8D9SciWc
+      - AI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
     restart: unless-stopped
 
   frontend:
